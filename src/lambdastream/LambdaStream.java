@@ -54,39 +54,11 @@ public class LambdaStream {
 //
 //
 //
-//        Stream<String> lines = Files.lines(Paths.get("res/bilety.txt"));
-//
-//        Stream<Item> items = lines.map(line -> {
-//            String[] tmp = line.split(",");
-//            return new Item(Integer.parseInt(tmp[0]), tmp[1], tmp[2]);
-//        });
-//
-//        Map<String, Result> resultMap = items.collect(
-//                () -> {
-//                    Map<String, Result> tempResult = new HashMap<>();
-//                    return tempResult;
-//                }, (teapMap, item) -> {
-//                    Result result = teapMap.get(item.getCity());
-//                    if (result == null) {
-//                        result = new Result();                        
-//                        teapMap.put(item.getCity(), result);
-//                    }
-//                    result.putOfferers(item.getOfferer());
-//                    result.addTickets(item.getQuantity());
-//                }, (map1, map2) -> {
-//                    map1.putAll(map2);
-//                }
-//        );
-//        
-//        resultMap.forEach((x, y) -> System.out.println(x + " - " + y));
-//
-//
-//
         Stream<String> lines = Files.lines(Paths.get("res/bilety.txt"));
 
         Stream<Item> items = lines.map(line -> {
             String[] tmp = line.split(",");
-            return new Item(Integer.parseInt(tmp[0]), tmp[1], tmp[2]);
+            return new Item(Integer.parseInt(tmp[0].trim()), tmp[1].trim(), tmp[2].trim());
         });
 
         Map<String, Result> resultMap = items.collect(
@@ -106,10 +78,34 @@ public class LambdaStream {
                 }
         );
         
-        resultMap.forEach((x, y) -> System.out.println(x + " - " + y));
+        resultMap.forEach((x, y) -> System.out.println(x + " ; " + y));
 
 
 
-
+//        Stream<String> lines = Files.lines(Paths.get("res/bilety.txt"));
+//
+//        Stream<Item> items = lines.map(line -> {
+//            String[] tmp = line.split(",");
+//            return new Item(Integer.parseInt(tmp[0].trim()), tmp[1].trim(), tmp[2].trim());
+//        }).filter(x -> x.getOfferer().startsWith("A"));
+//
+//        Map<String, Result> resultMap = items.collect(
+//                () -> {
+//                    Map<String, Result> tempResult = new HashMap<>();
+//                    return tempResult;
+//                }, (teapMap, item) -> {
+//                    Result result = teapMap.get(item.getCity());
+//                    if (result == null) {
+//                        result = new Result();                        
+//                        teapMap.put(item.getCity(), result);
+//                    }
+//                    result.putOfferers(item.getOfferer());
+//                    result.addTickets(item.getQuantity());
+//                }, (map1, map2) -> {
+//                    map1.putAll(map2);
+//                }
+//        );
+//        
+//        resultMap.forEach((x, y) -> System.out.println(x + " - " + y));
     }
 }

@@ -39,7 +39,7 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result{" + "offerers=" + offerers + ", quantity=" + quantity + '}';
+        return quantity + " ; " + offerers;
     }
     
     
