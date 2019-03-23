@@ -54,14 +54,10 @@ public class LambdaStream {
 //
 //
 //
-        Stream<String> lines = Files.lines(Paths.get("res/bilety.txt"));
-
-        Stream<Item> items = lines.map(line -> {
+        Files.lines(Paths.get("res/bilety.txt")).map(line -> {
             String[] tmp = line.split(",");
             return new Item(Integer.parseInt(tmp[0].trim()), tmp[1].trim(), tmp[2].trim());
-        });
-
-        Map<String, Result> resultMap = items.collect(
+        }).collect(
                 () -> {
                     Map<String, Result> tempResult = new HashMap<>();
                     return tempResult;
@@ -76,9 +72,7 @@ public class LambdaStream {
                 }, (map1, map2) -> {
                     map1.putAll(map2);
                 }
-        );
-        
-        resultMap.forEach((x, y) -> System.out.println(x + " ; " + y));
+        ).forEach((x, y) -> System.out.println(x + " ; " + y));
 
 
 
